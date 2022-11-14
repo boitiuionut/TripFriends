@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TripFriendsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FeedbacksData">
+          <Key>
+            <PropertyRef Name="feedbackid" />
+          </Key>
+          <Property Name="feedbackid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="rating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TripsData">
+          <Key>
+            <PropertyRef Name="tripid" />
+          </Key>
+          <Property Name="tripid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="town" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="detailedaddress" Type="varchar" MaxLength="100" />
+          <Property Name="tripdate" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="tripduration" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="availability" Type="int" Nullable="false" />
+          <Property Name="whycompany" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersData">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nume" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenume" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefon" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="pozaprofil" Type="varchar(max)" />
+          <Property Name="descriere" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_FeedbacksData_UsersData">
+          <End Role="UsersData" Type="Self.UsersData" Multiplicity="1" />
+          <End Role="FeedbacksData" Type="Self.FeedbacksData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersData">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="FeedbacksData">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TripsData_UsersData">
+          <End Role="UsersData" Type="Self.UsersData" Multiplicity="1" />
+          <End Role="TripsData" Type="Self.TripsData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersData">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="TripsData">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TripFriendsDBModelStoreContainer">
+          <EntitySet Name="FeedbacksData" EntityType="Self.FeedbacksData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TripsData" EntityType="Self.TripsData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersData" EntityType="Self.UsersData" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FeedbacksData_UsersData" Association="Self.FK_FeedbacksData_UsersData">
+            <End Role="UsersData" EntitySet="UsersData" />
+            <End Role="FeedbacksData" EntitySet="FeedbacksData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TripsData_UsersData" Association="Self.FK_TripsData_UsersData">
+            <End Role="UsersData" EntitySet="UsersData" />
+            <End Role="TripsData" EntitySet="TripsData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TripFriendsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="UsersData">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefon" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pozaprofil" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="descriere" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TripsDatas" Relationship="TripFriendsDBModel.FK_TripsData_UsersData" FromRole="UsersData" ToRole="TripsData" />
+          <NavigationProperty Name="FeedbacksDatas" Relationship="TripFriendsDBModel.FK_FeedbacksData_UsersData" FromRole="UsersData" ToRole="FeedbacksData" />
+        </EntityType>
+        <EntityContainer Name="TripFriendsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UsersDatas" EntityType="Self.UsersData" />
+          <EntitySet Name="TripsDatas" EntityType="TripFriendsDBModel.TripsData" />
+          <AssociationSet Name="FK_TripsData_UsersData" Association="TripFriendsDBModel.FK_TripsData_UsersData">
+            <End Role="UsersData" EntitySet="UsersDatas" />
+            <End Role="TripsData" EntitySet="TripsDatas" />
+          </AssociationSet>
+          <EntitySet Name="FeedbacksDatas" EntityType="TripFriendsDBModel.FeedbacksData" />
+          <AssociationSet Name="FK_FeedbacksData_UsersData" Association="TripFriendsDBModel.FK_FeedbacksData_UsersData">
+            <End Role="UsersData" EntitySet="UsersDatas" />
+            <End Role="FeedbacksData" EntitySet="FeedbacksDatas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TripsData">
+          <Key>
+            <PropertyRef Name="tripid" />
+          </Key>
+          <Property Name="tripid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="town" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="detailedaddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tripdate" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="tripduration" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="availability" Type="Int32" Nullable="false" />
+          <Property Name="whycompany" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UsersData" Relationship="TripFriendsDBModel.FK_TripsData_UsersData" FromRole="TripsData" ToRole="UsersData" />
+        </EntityType>
+        <Association Name="FK_TripsData_UsersData">
+          <End Type="TripFriendsDBModel.UsersData" Role="UsersData" Multiplicity="1" />
+          <End Type="TripFriendsDBModel.TripsData" Role="TripsData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersData">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="TripsData">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FeedbacksData">
+          <Key>
+            <PropertyRef Name="feedbackid" />
+          </Key>
+          <Property Name="feedbackid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="rating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UsersData" Relationship="TripFriendsDBModel.FK_FeedbacksData_UsersData" FromRole="FeedbacksData" ToRole="UsersData" />
+        </EntityType>
+        <Association Name="FK_FeedbacksData_UsersData">
+          <End Type="TripFriendsDBModel.UsersData" Role="UsersData" Multiplicity="1" />
+          <End Type="TripFriendsDBModel.FeedbacksData" Role="FeedbacksData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersData">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="FeedbacksData">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TripFriendsDBModelStoreContainer" CdmEntityContainer="TripFriendsDBEntities">
+          <EntitySetMapping Name="UsersDatas">
+            <EntityTypeMapping TypeName="TripFriendsDBModel.UsersData">
+              <MappingFragment StoreEntitySet="UsersData">
+                <ScalarProperty Name="descriere" ColumnName="descriere" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="nume" ColumnName="nume" />
+                <ScalarProperty Name="prenume" ColumnName="prenume" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="pozaprofil" ColumnName="pozaprofil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripsDatas">
+            <EntityTypeMapping TypeName="TripFriendsDBModel.TripsData">
+              <MappingFragment StoreEntitySet="TripsData">
+                <ScalarProperty Name="whycompany" ColumnName="whycompany" />
+                <ScalarProperty Name="availability" ColumnName="availability" />
+                <ScalarProperty Name="tripduration" ColumnName="tripduration" />
+                <ScalarProperty Name="tripdate" ColumnName="tripdate" />
+                <ScalarProperty Name="detailedaddress" ColumnName="detailedaddress" />
+                <ScalarProperty Name="town" ColumnName="town" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="tripid" ColumnName="tripid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedbacksDatas">
+            <EntityTypeMapping TypeName="TripFriendsDBModel.FeedbacksData">
+              <MappingFragment StoreEntitySet="FeedbacksData">
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="feedbackid" ColumnName="feedbackid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
