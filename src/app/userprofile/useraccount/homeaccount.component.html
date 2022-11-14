@@ -1,0 +1,257 @@
+<div class="back-image">
+    <nav class="main-menu">
+        <div class="welcome-message">
+            <i>Welcome<br> <b style="color:#e8491d"> {{authenticationService.username}}
+                </b></i>
+        </div>
+        <ul>
+            <li>
+                <a (click)="goToRoute('userhome-page')"><i class="current fa fa-home fa-2x">
+                    </i>
+                    <span class="nav-text current">
+                        Home
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('useractivity-page')"><i class="fa fa-globe-europe fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Activity
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('userfeedback-page')"><i class="fa fa-file-alt fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Feedback
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('userinfo-page')"><i class="fa fa-info fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Account-Info
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="logout">
+            <li>
+                <a (click)="goToRoute('')">
+                    <i class="fa fa-power-off fa-2x"></i>
+                    <span class="nav-text">
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="left-box">
+        <h2>Register a future trip</h2>
+        <form class="top-distance">
+            <div class="register-trip">
+                <input type="text" id="inputCountry" name="" [(ngModel)]="postTripModel.country"
+                    [ngModelOptions]="{standalone: true}" required="" autofocus="" autocomplete="off">
+                <label>Country</label>
+            </div>
+            <div class="register-trip">
+                <input type="text" id="inputTown" name="" [(ngModel)]="postTripModel.town"
+                    [ngModelOptions]="{standalone: true}" required="" autofocus="" autocomplete="off">
+                <label>Town</label>
+            </div>
+            <div class="register-trip">
+                <input type="text" id="inputAddress" [(ngModel)]="postTripModel.address"
+                    [ngModelOptions]="{standalone: true}" required="" autofocus="" autocomplete="off">
+                <label>Address</label>
+            </div>
+            <div class="register-trip">
+                <input type="text" class="trip-date" onfocus="(this.type='date')" onfocusout="(this.type='text')"
+                    [(ngModel)]="postTripModel.date" [ngModelOptions]="{standalone: true}" id="inputDate" required=""
+                    autofocus="" autocomplete="off">
+                <label>Trip's date</label>
+            </div>
+            <div class="register-trip">
+                <input type="text" id="inputDuration" [(ngModel)]="postTripModel.duration"
+                    [ngModelOptions]="{standalone: true}" required="" autofocus="" autocomplete="off">
+                <label>Trip's duration(days)</label>
+            </div>
+            <div class="description"><label>What kind of company are you searching for? Why?</label></div>
+            <div class="register-trip">
+                <textarea id="reason-trip" rows="6" cols="52" [(ngModel)]="postTripModel.description"
+                    [ngModelOptions]="{standalone: true}" autocomplete="off">
+                </textarea>
+            </div>
+            <input type="submit" name="" value="Submit" (click)="postTrip()">
+        </form>
+    </div>
+
+    <div class="right-box">
+        <div class="search-box">
+            <input type="text" onfocusin="this.placeholder=''" onfocusout="this.placeholder='Where to?'" autocomplete="off"
+                placeholder="{{searchBoxText}}" name="search" [(ngModel)]="seachBox" [ngModelOptions]="{standalone: true}" (ngModelChange)="searchInTable(seachBox)">
+            <!--<input type="submit" value="Search" (click)="searchInTable(seachBox)">-->
+        </div>
+        <div class="table-responsive">
+            <table class="table" datatable="">
+                <thead>
+                    <tr>
+                        <th class="th-username-width">
+                            <p>Name</p>
+                        </th>
+                        <th>
+                            <p>Country</p>
+                        </th>
+                        <th>
+                            <p>Town</p>
+                        </th>
+                        <th>
+                            <p>Date</p>
+                        </th>
+                        <th class="th-width">
+                            <p>Rating</p>
+                        </th>
+                        <th>
+                            <p>Phone</p>
+                        </th>
+                        <th class="th-width">
+                            <p>More user details</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let trip of allData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <td>
+                            <p>{{trip.firstName}}&nbsp;{{trip.lastName}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.country}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.town}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.date}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.avgRating}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.phone}}</p>
+                        </td>
+                        <td>
+                            <p class="detailed-trip" (click)="sendTripInfo(trip)">see more</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <jw-modal id="custom-modal-1">
+            <div class="box">
+                <div class="spliting-modal">
+                    <h2>Informatiile calatoriei</h2>
+                    <form>
+                        <p class="info">
+                            <input type="text" id="inputNume" [(ngModel)]="tripInfoAllData.firstName"
+                                [ngModelOptions]="{standalone: true}" disabled>
+                            <label>Name</label>
+                        </p>
+                        <p class="info">
+                            <input type="text" id="inputPrenume" [(ngModel)]="tripInfoAllData.lastName"
+                                [ngModelOptions]="{standalone: true}" disabled>
+                            <label>Surname</label>
+                        </p>
+                        <p class="info">
+                            <input type="text" id="inputTelefon" [(ngModel)]="tripInfoAllData.phone"
+                                [ngModelOptions]="{standalone: true}" disabled>
+                            <label>Phone</label>
+                        </p>
+                        <p class="info">
+                            <input type="text" id="inputEmail" [(ngModel)]="tripInfoAllData.email"
+                                [ngModelOptions]="{standalone: true}" disabled>
+                            <label>Email</label>
+                        </p>
+                        <p class="info">
+                            <input type="text" id="inputUser" [(ngModel)]="tripInfoAllData.username"
+                                [ngModelOptions]="{standalone: true}" disabled>
+                            <label>Username</label>
+                        </p>
+                        <p class="info">
+                            <textarea type="text" id="reason-trip1" [(ngModel)]="tripInfoAllData.description"
+                                [ngModelOptions]="{standalone: true}" disabled cols="53" rows="3"></textarea>
+                            <label class="info">Self description</label>
+
+                            <p class="info">
+                                <input type="text" id="country" [(ngModel)]="tripInfoAllData.country"
+                                    [ngModelOptions]="{standalone: true}" disabled>
+                                <label>Country</label>
+                            </p>
+                            <p class="info">
+                                <input type="text" id="town" [(ngModel)]="tripInfoAllData.town"
+                                    [ngModelOptions]="{standalone: true}" disabled>
+                                <label>Town</label>
+                            </p>
+                            <p class="info">
+                                <input type="text" id="address" [(ngModel)]="tripInfoAllData.address"
+                                    [ngModelOptions]="{standalone: true}" disabled>
+                                <label>Address</label>
+                            </p>
+                            <p class="info">
+                                <input type="text" id="date" [(ngModel)]="tripInfoAllData.date"
+                                    [ngModelOptions]="{standalone: true}" disabled>
+                                <label>Date</label>
+                            </p>
+                            <p class="info">
+                                <input type="text" id="duration" [(ngModel)]="tripInfoAllData.duration"
+                                    [ngModelOptions]="{standalone: true}" disabled>
+                                <label>Duration</label>
+                            </p>
+                            <p class="info">
+                                <textarea type="text" id="reason-trip2" [(ngModel)]="tripInfoAllData.descriptionTrip"
+                                    [ngModelOptions]="{standalone: true}" disabled cols="53" rows="3"></textarea>
+                                <label>Description trip</label>
+                            </p>
+                    </form>
+                </div>
+                <div class="spliting-modal">
+                    <h2>Feedback received by user</h2>
+                    <div class="table-responsive" style="overflow-y:auto; max-height: 640px; display: block;">
+                        <table class="table" datatable="">
+                            <thead>
+                                <tr>
+                                    <th class="th-width">
+                                        <p>No.</p>
+                                    </th>
+                                    <th style="white-space: normal; max-width: 300px;">
+                                        <p>Description</p>
+                                    </th>
+                                    <th class="th-width">
+                                        <p>Rating</p>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let info of tripInfoAllData.userFeedbackInfo; let i = index">
+                                    <td class="th-width">
+                                        <p>{{i+1}}</p>
+                                    </td>
+                                    <td style="white-space: normal; max-width: 300px;">
+                                        <p>{{info.description}}</p>
+                                    </td>
+                                    <td class="th-width">
+                                        <p>{{info.rating}}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="buton-close" value="Close" (click)="closeModal('custom-modal-1')">
+            </div>
+        </jw-modal>
+    </div>
+</div>

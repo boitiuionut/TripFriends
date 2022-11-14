@@ -1,0 +1,124 @@
+<div class="back-image">
+    <nav class="main-menu">
+        <div class="welcome-message">
+            <i>Welcome<br> <b style="color:#e8491d"> {{authenticationService.username}}
+                </b></i>
+        </div>
+        <ul>
+            <li>
+                <a (click)="goToRoute('userhome-page')"><i class="fa fa-home fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Home
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('useractivity-page')"><i class="fa fa-globe-europe fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Activity
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('userfeedback-page')"><i class="current fa fa-file-alt fa-2x">
+                    </i>
+                    <span class="nav-text current">
+                        Feedback
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('userinfo-page')"><i class="fa fa-info fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Account-Info
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="logout">
+            <li>
+                <a (click)="goToRoute('')">
+                    <i class="fa fa-power-off fa-2x"></i>
+                    <span class="nav-text">
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="left-box">
+        <h2>Post a feedback</h2>
+        <form class="form-properties">
+            <div class="feedback-trip">
+                <input type="text" id="inputUsername" name="" [(ngModel)]="feedbackInfoModel.username"
+                    [ngModelOptions]="{standalone: true}" required="" autofocus="" autocomplete="off">
+                <label>Feedback to(username)</label>
+            </div>
+            <div class="rate-label"><label>Rate the person's company:</label>
+                <div class="rating">
+                    <input type="radio" name="rating" id="star1" [(ngModel)]="feedbackInfoModel.rating"
+                        [ngModelOptions]="{standalone: true}" value=5><label for="star1"></label>
+                    <input type="radio" name="rating" id="star2" [(ngModel)]="feedbackInfoModel.rating"
+                        [ngModelOptions]="{standalone: true}" value=4><label for="star2"></label>
+                    <input type="radio" name="rating" id="star3" [(ngModel)]="feedbackInfoModel.rating"
+                        [ngModelOptions]="{standalone: true}" value=3><label for="star3"></label>
+                    <input type="radio" name="rating" id="star4" [(ngModel)]="feedbackInfoModel.rating"
+                        [ngModelOptions]="{standalone: true}" value=2><label for="star4"></label>
+                    <input type="radio" name="rating" id="star5" [(ngModel)]="feedbackInfoModel.rating"
+                        [ngModelOptions]="{standalone: true}" value=1><label for="star5"></label>
+                </div>
+            </div>
+            <div class="feedback-trip">
+                <label>Describe the experience:</label>
+                <textarea id="reason-trip" [(ngModel)]="feedbackInfoModel.description"
+                    [ngModelOptions]="{standalone: true}" rows="10" cols="52">
+                </textarea>
+            </div>
+            <input type="submit" name="" value="Submit" (click)="postFeedback()">
+        </form>
+    </div>
+    <div class="right-box">
+        <div>
+            <h2>Feedback received</h2>
+        </div>
+        <div class="table-responsive" style="overflow-y:auto; max-height: 664px;">
+            <table class="table" datatable="">
+                <thead>
+                    <tr>
+                        <th class="number-th">
+                            <p>No.</p>
+                        </th>
+                        <th class="description-th">
+                            <p>Description</p>
+                        </th>
+                        <th class="number-th">
+                            <p>Rating</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let info of userdataInfoModel | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <td>
+                            <p>{{i+1}}</p>
+                        </td>
+                        <td>
+                            <p>{{info.description}}</p>
+                        </td>
+                        <td>
+                            <p>{{info.rating}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="userdataInfoModel.length == 0">
+                <p class="no-feedback-info">There is no feedback posted about you!</p>
+            </div>
+        </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>

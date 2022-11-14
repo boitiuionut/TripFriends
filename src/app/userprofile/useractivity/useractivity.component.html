@@ -1,0 +1,186 @@
+<div class="back-image">
+    <nav class="main-menu">
+        <div class="welcome-message">
+            <i>Welcome<br> <b style="color:#e8491d"> {{authenticationService.username}}
+                </b></i>
+        </div>
+        <ul>
+            <li>
+                <a (click)="goToRoute('userhome-page')"><i class=" fa fa-home fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Home
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('useractivity-page')"><i class="current fa fa-globe-europe fa-2x">
+                    </i>
+                    <span class="nav-text current">
+                        Activity
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('userfeedback-page')"><i class="fa fa-file-alt fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Feedback
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('userinfo-page')"><i class="fa fa-info fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Account-Info
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="logout">
+            <li>
+                <a (click)="goToRoute('')">
+                    <i class="fa fa-power-off fa-2x"></i>
+                    <span class="nav-text" (click)="logout()">
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="left-box">
+        <h2>Future trips</h2>
+        <div>
+            <label>Sort by: </label>
+            <input type="submit" value="Country" (click)="futureTripsSortByCountry()">
+            <input type="submit" value="Town">
+            <input type="submit" value="Date">
+        </div>
+        <div class="table-responsive">
+            <table class="table" datatable="">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>Trip no</p>
+                        </th>
+                        <th>
+                            <p>Country</p>
+                        </th>
+                        <th>
+                            <p>Town</p>
+                        </th>
+                        <th>
+                            <p>Detailed address</p>
+                        </th>
+                        <th>
+                            <p>Date of trip</p>
+                        </th>
+                        <th>
+                            <p>Trip days</p>
+                        </th>
+                        <th>
+                            <p>Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let trip of futureTrips; let i = index">
+                        <td>
+                            <p>{{i+1}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.country}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.town}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.address}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.date}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.duration}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.description}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="futureTrips.length == 0">
+                <p class="no-trips-info">There are no future trips posted by you!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-box">
+        <h2>Past experiences</h2>
+        <div>
+            <label>Sort by: </label>
+            <input type="submit" value="Country" (click)="sortPastTripsByCountry()">
+            <input type="submit" value="Town" (click)="sortPastTripsByTown()">
+            <input type="submit" value="Date" (click)="sortPastTripsByDate()">
+        </div>
+        <div class="table-responsive">
+            <table class="table" datatable="">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>Trip no</p>
+                        </th>
+                        <th>
+                            <p>Country</p>
+                        </th>
+                        <th>
+                            <p>Town</p>
+                        </th>
+                        <th>
+                            <p>Detailed address</p>
+                        </th>
+                        <th>
+                            <p>Date of trip</p>
+                        </th>
+                        <th>
+                            <p>Trip days</p>
+                        </th>
+                        <th>
+                            <p>Description</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let trip of pastTrips | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <td>
+                            <p>{{i+1}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.country}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.town}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.address}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.date}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.duration}}</p>
+                        </td>
+                        <td>
+                            <p>{{trip.description}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="pastTrips.length == 0">
+                <p class="no-trips-info">There are no past trips posted by you!</p>
+            </div>
+        </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>

@@ -1,0 +1,87 @@
+<div class="back-image">
+    <nav class="main-menu">
+        <div class="welcome-message">
+            <i>Welcome<br> <b style="color:#e8491d"> {{authenticationService.username}}
+                </b></i>
+        </div>
+        <ul>
+            <li>
+                <a (click)="goToRoute('userhome-page')"><i class="fa fa-home fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Home
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('useractivity-page')"><i class="fa fa-globe-europe fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Activity
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('userfeedback-page')"><i class="fa fa-file-alt fa-2x">
+                    </i>
+                    <span class="nav-text">
+                        Feedback
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a (click)="goToRoute('userinfo-page')"><i class="current fa fa-info fa-2x">
+                    </i>
+                    <span class="nav-text current">
+                        Account-Info
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="logout">
+            <li>
+                <a (click)="goToRoute('')">
+                    <i class="fa fa-power-off fa-2x"></i>
+                    <span class="nav-text">
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="box">
+        <h2>Informatiile contului dumneavoastra</h2>
+        <form>
+            <div class="info">
+                <input type="text" id="inputNume" [(ngModel)]="userInfoModel.firstName" [ngModelOptions]="{standalone: true}" [ngClass]="{disabledDiv: !editable}">
+                <label>Name</label>
+            </div>
+            <div class="info">
+                <input type="text" id="inputPrenume" [(ngModel)]="userInfoModel.lastName" [ngModelOptions]="{standalone: true}" [ngClass]="{disabledDiv: !editable}">
+                <label>Surname</label>
+            </div>
+            <div class="info">
+                <input type="text" id="inputTelefon" [(ngModel)]="userInfoModel.phone" [ngModelOptions]="{standalone: true}" [ngClass]="{disabledDiv: !editable}">
+                <label>Phone</label>
+            </div>
+            <div class="info">
+                <input type="text" id="inputEmail" [(ngModel)]="userInfoModel.email" [ngModelOptions]="{standalone: true}" [ngClass]="{disabledDiv: !editable}">
+                <label>Email</label>
+            </div>
+            <div class="info">
+                <input type="text" id="inputUser" [(ngModel)]="userInfoModel.username" [ngModelOptions]="{standalone: true}" disabled>
+                <label>Username</label>
+            </div>
+            <div class="description"><label>Self description</label></div>
+            <div>
+                <textarea id="reason-trip" [(ngModel)]="userInfoModel.description" [ngModelOptions]="{standalone: true}" [ngClass]="{disabledDiv: !editable}" rows="5" cols="51">
+                </textarea>
+            </div>
+            <input type="button" class="buton-cancel" [ngClass]="{disabledElement: !editable}" value="Cancel"
+                (click)="disableUserDataToBeModified()">
+            <input type="button" class="buton-actualizare" [hidden]="editable" value="Actualizati" (click)="enableUserDataToBeModified()">
+            <input type="button" class="buton-actualizare" [ngClass]="{disabledElement: !editable}" value="Confirmati" (click)="editUserInformation()">
+        </form>
+    </div>
+</div>

@@ -1,0 +1,376 @@
+
+.back-image{
+    background-image: url('../../../assets/logo3.jpg');
+    background-size: cover;
+    min-height: 969px;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.fa-2x{
+    font-size: 2em;
+}
+
+.fa{
+    position: relative;
+    display: table-cell;
+    width: 70px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 30px;
+}
+
+.main-menu .fa:hover{
+    cursor: pointer;
+}
+
+.main-menu .current {
+    color: #e8491d;
+    font-weight: bold;
+}
+
+.main-menu:hover, nav.main-menu.expanded{
+    width: 200px;
+    overflow: hidden;
+}
+
+.main-menu:hover > .welcome-message{
+    text-align: center;
+}
+
+.main-menu{
+    background: #35424a;
+    border-right: 2px solid #e8491d;
+    padding-top: 90px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 70px;
+    overflow: hidden;
+    transition: width 0.3s linear;
+    z-index: 1000;
+ 
+}
+
+.main-menu > ul{
+    margin: 170px 0;
+}
+
+.main-menu li{
+    position: relative;
+    display: block;
+    width: 230px;
+}
+
+.main-menu li .user-photo{
+    cursor: default;
+    border-radius: 50%;
+    color: #999;
+}
+.main-menu li .user-photo:hover{
+    background-color: none;
+    transition: all .3s linear;
+}
+
+.main-menu .add-photo-button{
+    font-size: 9px;
+    background: lightgrey;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 13px;
+    transition: all .3s linear;
+}
+
+.main-menu li a{
+    position: relative;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+    color: #999;
+    font-family: arial;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all .3s linear;
+}
+
+.main-menu .navicon{
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align:  middle;
+    font-size: 18px;
+}
+
+.main-menu .nav-text{
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 130px;
+    font-family: tahoma;
+    font-size: 20px;
+}
+
+.main-menu .nav-text:hover{
+    cursor: pointer;
+}
+
+.main-menu .logout{
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+}
+
+.no-touch .scrollable.hover{
+    overflow-y: auto;
+}
+
+.no-touch .scrollable.hover:hover{
+    overflow-y: auto;
+    overflow: visible;
+}
+
+a:hover, a:focus{
+    text-decoration: none;
+}
+
+nav{
+    user-select: none;
+}
+
+nav ul, nav li{
+    outline: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.main-menu li:hover a,
+nav.main-menu li.active a,
+.dropdown-menu li a:hover,
+.dropdown-menu li a:focus,
+.dropdown-menu .active a,
+.dropdown-menu .active a:hover,
+.dropdown-menu .active a:focus,
+.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
+.dashboard-page nav.dashboard-pmenu ul li.active a{
+
+    color: white;
+    background-color: #5fa2db;
+}
+
+.rating{
+    position: relative;
+    direction: rtl;
+}
+
+.rating input{
+    display: none;
+}
+
+.rating label{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    width: 50px;
+}
+
+.rating label:before{
+    content: '\2605';
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    font-size: 50px;
+    color: #35424a;
+    top: 0;
+}
+
+.rating label:after{
+    content: '\2605';
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    font-size: 50px;
+    color: #e8491d;
+    top: 0;
+    opacity: 0;
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after
+{
+    opacity:1;
+}
+
+.rate-label{
+    color: #fff;
+    position: relative;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.left-box{ 
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    transform: translate(-30%, -23%);
+    height: 910px;
+    width: 860px;
+    border-right: 3px solid #e8491d;
+    border-left: 3px solid #e8491d;
+    border-radius: 8%;
+    padding: 40px;
+    background: rgba(0, 0, 0, .4);
+    box-sizing: border-box;
+}
+
+.left-box h2{
+    color: #fff;
+    text-align: center;
+}
+
+.left-box .form-properties{
+    margin-top: 20%;
+}
+
+.left-box .feedback-trip{
+
+    position: relative;
+    transform: translate(13%, 30%);
+}
+
+.left-box .feedback-trip input{
+    text-align: center;
+    width: 40%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    margin-left: 18%;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+
+.left-box .feedback-trip label{
+    position: absolute;
+    top: 0;
+    left: 180px;
+    letter-spacing: 1px;
+    padding: 10px 0;
+    font-size: 18px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.left-box .feedback-trip input:focus ~ label,
+.left-box .feedback-trip input:valid ~ label{
+    top: -20px;
+    left: 180px;
+    color: #e8491d;
+    font-size: 16px;
+}
+.left-box input[type="submit"]{
+    background: transparent;
+    margin-top: 100px;
+    margin-left: 350px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #e8491d;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.left-box .feedback-trip #reason-trip{
+    text-align: center;
+    color: #fff;
+    resize: none;
+    padding: 12px 20px;
+    border: 2px solid #e8491d;
+    border-radius: 10%;
+    margin-top: 40px;
+    margin-left: 50px;
+    background: rgba(0, 0, 0, .6);
+    outline: 0;
+}
+
+textarea:hover{
+    cursor: text;
+}
+
+.right-box{ 
+    position: absolute;
+    top: 25%;
+    left: 65.5%;
+    transform: translate(-30%, -23%);
+    border-left: 3px solid #e8491d;
+    border-right: 3px solid #e8491d;
+    border-radius: 8%;
+    height: 910px;
+    width: 860px;
+    padding: 40px;
+    background: rgba(0, 0, 0, .4);
+}
+
+.right-box h2{
+    text-align: center;
+    color: #fff;
+    margin-bottom: 100px;
+}
+
+.number-th
+{
+    width: 60px;
+}
+
+.description-th
+{
+    width: 550px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff;
+  opacity: 1;
+}
+
+.right-box table {
+    font-family: arial, sans-serif;
+    background: rgba(0, 0, 0, .4);
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th{
+    background-color: #e8491d;
+}
+td, th {
+    border: 1px solid #999;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+tr:nth-child(even) {
+    background-color: #35424a;
+}
+
+.no-feedback-info
+{
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+

@@ -1,0 +1,79 @@
+<header>
+<div class="container">
+    <div id="branding">
+        <h1><span class="highlight">Trip Friends</span></h1>
+    </div>
+    <nav class="navbar">
+        <ul>
+            <li class="current"><a>Home</a></li>
+            <li><a routerLink="/info-page" routerLinkActive="active">About</a></li>
+            <li><a routerLink="/contact-page" routerLinkActive="active">Contact</a></li>
+        </ul>
+    </nav>
+</div>
+</header>
+<div class="box" *ngIf="flag == true">
+    <h2>Login</h2>
+    <form>
+        <div class="sign-in">
+            <input type="text" id="inputEmail" name="" [(ngModel)]="loginData.username" [ngModelOptions]="{standalone: true}" required="" autocomplete="off">
+            <label>Username</label>
+        </div>
+        <div class="sign-in">
+            <input type="password" id="inputPassword" [(ngModel)]="loginData.password" [ngModelOptions]="{standalone: true}" name="" required="" autocomplete="off">
+            <label>Password</label>
+        </div>
+        <input type="submit" name="" value="Submit" (click)="login()">
+        <u class="cursor-pointer" (click)="switchFlag()">Register</u>
+    </form>
+</div>
+<div class="box" *ngIf="flag == false">
+    <h2>Register</h2>
+    <form>
+        <div class="sign-in">
+            <input type="text" id="inputNume" name="" [(ngModel)]="registerModel.nume" [ngModelOptions]="{standalone: true}" required=""
+            autofocus="" autocomplete="false">
+            <label>Nume</label>
+        </div>
+        <div class="sign-in">
+            <input type="text" id="inputPrenume" name="" [(ngModel)]="registerModel.prenume" [ngModelOptions]="{standalone: true}" required=""
+            autofocus="" autocomplete="false">
+            <label>Prenume</label>
+        </div>
+        <div class="sign-in">
+            <input type="text" id="inputTelefon" name="" [(ngModel)]="registerModel.telefon" [ngModelOptions]="{standalone: true}" required=""
+            autofocus="" autocomplete="false">
+            <label>Telefon</label>
+        </div>
+        <div class="sign-in">
+            <input type="text" id="inputEmail" name="" [(ngModel)]="registerModel.email" [ngModelOptions]="{standalone: true}" required=""
+            autofocus="" autocomplete="false">
+            <label>Email</label>
+        </div>
+        <div class="sign-in">
+            <input type="text" id="inputUser" name="" [(ngModel)]="registerModel.username" [ngModelOptions]="{standalone: true}" required=""
+            autofocus="" autocomplete="false">
+            <label>Username</label>
+        </div>
+        <div class="sign-in">
+            <input type="password" id="inputPassword" [(ngModel)]="registerModel.password" [ngModelOptions]="{standalone: true}" min-length="6"  required="">
+            <label>Parola</label>
+        </div>
+        <div class="sign-in">
+            <input type="password" id="inputConfirmPassword" [(ngModel)]="registerModel.confirmPassword" [ngModelOptions]="{standalone: true}" min-length="6" required="">
+            <label>Confirma parola</label>
+        </div>
+        <input type="submit" name="" value="Submit" (click)="register()">
+        <u class="cursor-pointer" (click)="switchFlag()">Login</u>
+    </form>
+</div>
+
+<section id="showcase">
+    <div class="container">
+        <h1 *ngIf="flag==true"><q>One’s destination is never a place, but a new way of seeing things.</q></h1>
+    </div>
+</section>
+
+<footer>
+    <p>Trip Friends, Copyright &copy; 2020</p>
+</footer>
